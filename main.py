@@ -46,8 +46,6 @@ if is_create_playlist_mode(answers):
     playlist = spotify.user_playlist_create(user=answers['username'],
                                             name=f"My Top {answers['num_songs']} Songs",
                                             public=answers['playlist_type']=='Public')
-    top_songs_uri = []
-    for track in top_songs_data['items']:
-        top_songs_uri.append(track['uri'])
+    top_songs_uri = [track['uri'] for track in top_songs_data['items']
     
     spotify.playlist_add_items(playlist_id=playlist['id'], items=top_songs_uri)
